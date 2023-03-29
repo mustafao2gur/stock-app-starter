@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 
 import { TextField } from "@mui/material";
+import useStockCall from "../../hooks/useStockCall";
 
 const style = {
   position: "absolute",
@@ -20,6 +21,24 @@ const style = {
 
 export default function FirmModal({setOpen,handleClose,info,setInfo,open}) {
     const handleOpen = () => setOpen(true);
+    const handleChange=(e)=>{
+            const { name, value } = e.target;
+                setInfo({ ...info, [name]: value });
+                // setInfo (...info([e.target.name]=e.target.value))
+    }
+      const { postStockData, putStockData } = useStockCall();
+      const handleSubmit =(e)=>{
+        e.preventDefault()
+        if(info.id){
+            putStockData("firms", info);
+        }
+        else{
+                 postStockData("firms", info);
+        }
+            handleClose();
+        console.log(info)
+
+      }
   return (
     <div>
       <Button variant="contained" onClick={handleOpen}>
@@ -35,6 +54,7 @@ export default function FirmModal({setOpen,handleClose,info,setInfo,open}) {
           <Box
             sx={{ display: "flex", flexDirection: "column", gap: 2 }}
             component="form"
+            onSubmit={handleSubmit}
           >
             <TextField
               label="Firm Name"
@@ -43,6 +63,7 @@ export default function FirmModal({setOpen,handleClose,info,setInfo,open}) {
               type="text"
               variant="outlined"
               required
+              onChange={handleChange}
             />
             <TextField
               label="Phone"
@@ -51,6 +72,7 @@ export default function FirmModal({setOpen,handleClose,info,setInfo,open}) {
               type="tel"
               variant="outlined"
               required
+              onChange={handleChange}
             />
             <TextField
               label="Address"
@@ -59,6 +81,7 @@ export default function FirmModal({setOpen,handleClose,info,setInfo,open}) {
               type="text"
               variant="outlined"
               required
+              onChange={handleChange}
             />
 
             <TextField
@@ -68,6 +91,7 @@ export default function FirmModal({setOpen,handleClose,info,setInfo,open}) {
               type="url"
               variant="outlined"
               required
+              onChange={handleChange}
             />
 
             <Button type="submit" variant="contained">
