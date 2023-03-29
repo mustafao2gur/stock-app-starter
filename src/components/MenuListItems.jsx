@@ -49,10 +49,10 @@ const icons = [
   },
 ];
 const iconStyle = {
-//   color: "black",
-//   "& .MuiSvgIcon-root": { color: "black" },
-  "&:hover": { color: "blue" },
-  "&:hover .MuiSvgIcon-root": { color: "blue" },
+  //   color: "black",
+  //   "& .MuiSvgIcon-root": { color: "black" },
+  "&:hover": { color: "#1976D2" },
+  "&:hover .MuiSvgIcon-root": { color: "#1976D2" },
 };
 const MenuListItems = () => {
       const navigate = useNavigate();
