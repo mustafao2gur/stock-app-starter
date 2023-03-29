@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchFail, fetchStart, loginSuccess, registerSuccess } from "../features/authSlice";
+import { fetchFail, fetchStart, loginSuccess, logoutSuccess, registerSuccess } from "../features/authSlice";
 
 const useAuthCall = () => {
   const dispatch = useDispatch();
@@ -43,9 +43,20 @@ const useAuthCall = () => {
     }
   };
 
+  const logout = async () => {
+    dispatch(fetchStart());
+    try {
+      await axios.post(`${BASE_URL}account/auth/logout/`);
+      dispatch(logoutSuccess());
 
+      navigate("/");
+    } catch (err) {
+      dispatch(fetchFail());
+   
+    }
+  };
 
-  return { login, register };
+  return { login, register, logout };
 };
 
 export default useAuthCall;

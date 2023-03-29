@@ -12,10 +12,15 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Outlet } from "react-router-dom";
 import MenuListItems from "../components/MenuListItems";
+import { useSelector } from "react-redux";
+import { Button } from "@mui/material";
+import useAuthCall from "../hooks/useAuthCall";
 
 const drawerWidth = 240;
 
-function ResponsiveDrawer(props) {
+function Dashboard(props) {
+      const { currentUser } = useSelector((state) => state.auth);
+        const { logout } = useAuthCall();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -27,9 +32,8 @@ function ResponsiveDrawer(props) {
     <div>
       <Toolbar />
       <Divider />
- <MenuListItems/>
+      <MenuListItems />
       <Divider />
-  
     </div>
   );
 
@@ -56,10 +60,10 @@ function ResponsiveDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-
-Stock App
+          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
+            Stock App
           </Typography>
+          {currentUser && <Button color="inherit" onClick={()=>logout()} >{currentUser}</Button>}
         </Toolbar>
       </AppBar>
       <Box
@@ -109,13 +113,10 @@ Stock App
         }}
       >
         <Toolbar />
-    <Outlet/>
+        <Outlet />
       </Box>
     </Box>
   );
-
-
-
 };
 
-export default ResponsiveDrawer;
+export default Dashboard;
