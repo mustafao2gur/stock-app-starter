@@ -1,5 +1,5 @@
 import * as React from "react";
-import PropTypes from "prop-types";
+
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -19,8 +19,8 @@ import useAuthCall from "../hooks/useAuthCall";
 const drawerWidth = 240;
 
 function Dashboard(props) {
-      const { currentUser } = useSelector((state) => state.auth);
-        const { logout } = useAuthCall();
+  const { currentUser } = useSelector((state) => state.auth);
+  const { logout } = useAuthCall();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -63,7 +63,11 @@ function Dashboard(props) {
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
             Stock App
           </Typography>
-          {currentUser && <Button color="inherit" onClick={()=>logout()} >{currentUser}</Button>}
+          {currentUser && (
+            <Button color="inherit" onClick={() => logout()}>
+              {currentUser}
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
       <Box
@@ -117,6 +121,6 @@ function Dashboard(props) {
       </Box>
     </Box>
   );
-};
+}
 
 export default Dashboard;
