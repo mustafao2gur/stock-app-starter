@@ -5,12 +5,11 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import LockIcon from "@mui/icons-material/Lock";
 import image from "../assets/result.svg";
-
 import { Formik } from "formik";
-
 import LoginForm, { loginScheme } from "../components/LoginForm";
 import useAuthCall from "../hooks/useAuthCall";
-import { Link } from "@mui/material";
+import { Link } from "react-router-dom";
+
 
 
 const Login = () => {

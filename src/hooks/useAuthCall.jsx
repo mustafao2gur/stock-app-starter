@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { fetchFail, fetchStart, loginSuccess, registerSuccess } from "../features/authSlice";
 
 const useAuthCall = () => {
   const dispatch = useDispatch();
+    const navigate = useNavigate();
   const BASE_URL = "https://12151.fullstack.clarusway.com/";
 
 
@@ -15,6 +17,7 @@ const useAuthCall = () => {
         userInfo
       );
       dispatch(loginSuccess(data));
+            navigate("/stock");
     } catch (error) {
       dispatch(fetchFail());
       console.log(error);
@@ -34,13 +37,14 @@ const useAuthCall = () => {
         userInfo
       );
       dispatch(registerSuccess(data));
+            navigate("/stock");
     } catch (err) {
       dispatch(fetchFail());
     }
   };
 
 
-  
+
   return { login, register };
 };
 
