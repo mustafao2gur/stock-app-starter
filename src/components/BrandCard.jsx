@@ -3,12 +3,12 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-
 import Typography from "@mui/material/Typography";
 import { btnStyle, flex } from "../style/globalstyle";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from "@mui/icons-material/Edit";
-export default function BrandCard() {
+
+export default function BrandCard({brand}) {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -17,26 +17,20 @@ export default function BrandCard() {
         title="green iguana"
       />
       <CardContent>
+        <CardMedia
+          image={brand?.image}
+          sx={{ p: 1, objectFit: "contain", height: "250px" }}
+          component="img"
+          alt="brand-img"
+        />
         <Typography gutterBottom variant="h5" component="div">
-          Lizard
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+          {brand?.name}
         </Typography>
       </CardContent>
       <CardActions>
         <CardActions sx={flex}>
-          <EditIcon
-            sx={btnStyle}
-            onClick={() => {
-      
-            }}
-          />
-          <DeleteOutlineIcon
-            sx={btnStyle}
-            
-          />
+          <EditIcon sx={btnStyle} />
+          <DeleteOutlineIcon sx={btnStyle} />
         </CardActions>
       </CardActions>
     </Card>

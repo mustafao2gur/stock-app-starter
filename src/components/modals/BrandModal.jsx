@@ -19,6 +19,16 @@ const style = {
 };
 
 export default function BrandModal({ open, setOpen, handleClose, info, setInfo }) {
+  const handleChange = (e) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    setInfo({ ...info, [name]: value });
+  };
+  const handleSubmit = (e) => {
+        e.preventDefault();
+        handleClose()
+        
+  };
   return (
     <div>
       <Modal
@@ -28,7 +38,7 @@ export default function BrandModal({ open, setOpen, handleClose, info, setInfo }
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Box sx={flexColumn} component={"form"}>
+          <Box sx={flexColumn} component={"form"} onSubmit={handleSubmit}>
             <TextField
               label="Brand Name"
               name="name"
@@ -36,6 +46,8 @@ export default function BrandModal({ open, setOpen, handleClose, info, setInfo }
               type="text"
               variant="standard"
               required
+              value={info?.name || ""}
+              onChange={handleChange}
             />
 
             <TextField
@@ -44,7 +56,9 @@ export default function BrandModal({ open, setOpen, handleClose, info, setInfo }
               id="image"
               type="url"
               variant="standard"
+              value={info?.image || ""}
               required
+              onChange={handleChange}
             />
 
             <Button type="submit" variant="contained" size="large">
