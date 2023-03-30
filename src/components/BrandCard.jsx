@@ -11,21 +11,17 @@ import EditIcon from "@mui/icons-material/Edit";
 export default function BrandCard({brand}) {
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        sx={{ height: 140 }}
-        image="/static/images/cards/contemplative-reptile.jpg"
-        title="green iguana"
-      />
+
       <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          {brand?.name}
+        </Typography>
         <CardMedia
           image={brand?.image}
           sx={{ p: 1, objectFit: "contain", height: "250px" }}
           component="img"
           alt="brand-img"
         />
-        <Typography gutterBottom variant="h5" component="div">
-          {brand?.name}
-        </Typography>
       </CardContent>
       <CardActions>
         <CardActions sx={flex}>

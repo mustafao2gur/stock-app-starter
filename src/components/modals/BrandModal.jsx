@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { TextField } from "@mui/material";
 import { flexColumn } from "../../style/globalstyle";
+import useStockCall from "../../hooks/useStockCall";
 
 const style = {
   position: "absolute",
@@ -19,6 +20,7 @@ const style = {
 };
 
 export default function BrandModal({ open, setOpen, handleClose, info, setInfo }) {
+      const { postStockData, putStockData } = useStockCall();
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -27,16 +29,25 @@ export default function BrandModal({ open, setOpen, handleClose, info, setInfo }
   const handleSubmit = (e) => {
         e.preventDefault();
         handleClose()
-        
+        if (info.id) {
+          putStockData("brands", info);
+        } else {
+          postStockData("brands", info);
+        }
+            setInfo({});
   };
   return (
     <div>
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={() => {
+          setOpen(false);
+          setInfo({});
+        }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
+
         <Box sx={style}>
           <Box sx={flexColumn} component={"form"} onSubmit={handleSubmit}>
             <TextField
