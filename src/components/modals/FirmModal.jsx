@@ -35,7 +35,9 @@ export default function FirmModal({setOpen,handleClose,info,setInfo,open}) {
         else{
                  postStockData("firms", info);
         }
+        setInfo({})
             handleClose();
+       
         console.log(info)
 
       }
@@ -46,7 +48,10 @@ export default function FirmModal({setOpen,handleClose,info,setInfo,open}) {
       </Button>
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={() => {
+        handleClose();
+        setInfo({});
+        }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -63,6 +68,7 @@ export default function FirmModal({setOpen,handleClose,info,setInfo,open}) {
               type="text"
               variant="outlined"
               required
+              value={info?.name}
               onChange={handleChange}
             />
             <TextField
@@ -72,6 +78,7 @@ export default function FirmModal({setOpen,handleClose,info,setInfo,open}) {
               type="tel"
               variant="outlined"
               required
+              value={info?.phone}
               onChange={handleChange}
             />
             <TextField
@@ -81,6 +88,7 @@ export default function FirmModal({setOpen,handleClose,info,setInfo,open}) {
               type="text"
               variant="outlined"
               required
+              value={info?.address}
               onChange={handleChange}
             />
 
@@ -91,6 +99,7 @@ export default function FirmModal({setOpen,handleClose,info,setInfo,open}) {
               type="url"
               variant="outlined"
               required
+              value={info?.image}
               onChange={handleChange}
             />
 
